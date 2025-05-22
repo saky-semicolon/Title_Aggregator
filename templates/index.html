@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📰 Wired Buzz — Fresh & Trending</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #f9f9f9, #e0f7fa);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: start;
+            min-height: 100vh;
+        }
+        .container {
+            background: #fff;
+            border-radius: 16px;
+            padding: 30px;
+            max-width: 900px;
+            width: 100%;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+        .container:hover {
+            transform: translateY(-2px);
+        }
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            color: #00796b;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        h1::after {
+            content: "🔥";
+            position: absolute;
+            right: -30px;
+            top: 0;
+            font-size: 1.5rem;
+        }
+        .news-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .news-item {
+            background: #fafafa;
+            padding: 15px 20px;
+            border-left: 4px solid #00796b;
+            border-radius: 10px;
+            transition: background 0.3s, border-color 0.3s;
+        }
+        .news-item:hover {
+            background: #e0f2f1;
+            border-left-color: #004d40;
+        }
+        .news-item a {
+            font-size: 1.2rem;
+            color: #004d40;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .news-item a:hover {
+            text-decoration: underline;
+        }
+        .news-date {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+        .error-message {
+            color: crimson;
+            text-align: center;
+            font-size: 1rem;
+            margin-top: 20px;
+        }
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+            .news-item a {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🗞️ Wired Buzz — Latest Headlines</h1>
+
+        {% if error %}
+            <p class="error-message">⚠️ {{ error }}</p>
+        {% endif %}
+
+        {% if articles %}
+            <div class="news-container">
+                {% for article in articles %}
+                    <div class="news-item">
+                        <a href="{{ article.link }}" target="_blank">{{ article.title }}</a>
+                        {% if article.date %}
+                            <div class="news-date">📅 Published: {{ article.date }}</div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="error-message">🚫 No news found. Please check back later!</p>
+        {% endif %}
+    </div>
+</body>
+</html>
