@@ -10,10 +10,6 @@ logger = logging.getLogger(__name__)
 app = Flask(__name__)
 
 @app.route("/")
-def home():
-    return "Hello from Render!"
-
-@app.route("/")
 def index():
     try:
         logger.info("Starting index route")
