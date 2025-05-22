@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: title-aggregator
+    env: docker
+    plan: free
+    autoDeploy: true
+    envVars:
+      - key: RENDER
+        value: "true"

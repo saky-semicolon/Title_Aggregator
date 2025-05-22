@@ -42,6 +42,12 @@ def scrape_news():
                 service=chrome_service,
                 options=chrome_options
             )
+        elif os.environ.get("RENDER"):
+            logger.info("Running on Render")
+            chrome_options.binary_location = "/usr/bin/google-chrome"
+            chrome_service = Service("/usr/local/bin/chromedriver")
+            driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
+
         else:
             logger.info("Running locally")
             driver = webdriver.Chrome(
